@@ -14,7 +14,7 @@ set :pty,             true
 set :use_sudo,        false
 set :stage,           :production
 set :deploy_via,      :copy
-set :linked_files,   %w{config/database.yml}
+set :linked_files,   %w{config/database.yml config/secrets.yml}
 set :linked_dirs,    %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads}
 set :deploy_to,       "/home/deploy/sample_app_6th_ed"
 set :puma_bind,       "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
