@@ -6,15 +6,17 @@ set :repo_url, "git@github.com:nhuvnq670/sample_app_6th_ed.git"
 set :user,            'deploy'
 set :puma_threads,    [0, 6]
 set :puma_workers,    2
+set :branch, 'main'
+set :bundle_flags, "--deployment"
 
 # Don't change these unless you know what you're doing
 set :pty,             true
 set :use_sudo,        false
 set :stage,           :production
 set :deploy_via,      :copy
-set :linked_files,   %w{config/database.yml config/secrets.yml}
+set :linked_files,   %w{config/database.yml}
 set :linked_dirs,    %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads}
-set :deploy_to,       "/home/deploy/<yourappname>"
+set :deploy_to,       "/home/deploy/sample_app_6th_ed"
 set :puma_bind,       "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
 set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
 set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
@@ -46,8 +48,8 @@ namespace :deploy do
   desc "Make sure local git is in sync with remote."
   task :check_revision do
     on roles(:app) do
-      unless `git rev-parse HEAD` == `git rev-parse origin/master`
-        puts "WARNING: HEAD is not the same as origin/master"
+      unless `git rev-parse HEAD` == `git rev-parse main`
+        puts "WARNING: HEAD is not the same as main"
         puts "Run `git push` to sync changes."
         exit
       end
