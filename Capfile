@@ -10,8 +10,7 @@ require "capistrano/rvm"
 require "capistrano/puma"
 
 install_plugin Capistrano::Puma
-install_plugin Capistrano::Puma::Daemon
-
+install_plugin Capistrano::Puma::Systemd
 # Load the SCM plugin appropriate to your project:
 #
 # require "capistrano/scm/hg"
